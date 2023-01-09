@@ -6,7 +6,7 @@ set(sources
 
 source_group("Sources" FILES ${sources})
 
-add_executable(${TARGET} ${sources})
+add_executable(${TARGET} WIN32 ${sources})
 
 target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
