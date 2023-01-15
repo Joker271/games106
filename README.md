@@ -5,7 +5,7 @@ games106 现代图形绘制流水线原理与实践，作业框架。
 
 这里不推荐MacOS用户来使用作业框架或者学习Vulkan，因为没有官方自己提供的SDK，以及调试工具。
 
-因为作者不太熟悉Linux，同时Cauldron也没有提供Linux的支持，学习者有兴趣，可以自己提供Linux的适配，提供贡献到Cauldron。可以参考Cauldron中的issue[Linux and GCC support by Zakhrov · Pull Request #3 · GPUOpen-LibrariesAndSDKs/Cauldron (github.com)](https://github.com/GPUOpen-LibrariesAndSDKs/Cauldron/pull/3)
+因为作者不太熟悉Linux（主要是我懒~~~笑），同时Cauldron也没有提供Linux的支持，学习者有兴趣，可以自己提供Linux的适配，提供贡献到Cauldron。可以参考Cauldron中的issue[Linux and GCC support by Zakhrov · Pull Request #3 · GPUOpen-LibrariesAndSDKs/Cauldron (github.com)](https://github.com/GPUOpen-LibrariesAndSDKs/Cauldron/pull/3)
 
 # homework
 
