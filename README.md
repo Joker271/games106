@@ -7,6 +7,43 @@ games106 现代图形绘制流水线原理与实践，作业框架。
 
 因为作者不太熟悉Linux（主要是我懒~~~笑），同时Cauldron也没有提供Linux的支持，学习者有兴趣，可以自己提供Linux的适配，提供贡献到Cauldron。可以参考Cauldron中的issue[Linux and GCC support by Zakhrov · Pull Request #3 · GPUOpen-LibrariesAndSDKs/Cauldron (github.com)](https://github.com/GPUOpen-LibrariesAndSDKs/Cauldron/pull/3)
 
+# Build
+
+## how to get code
+
+框架代码引入了 submodule 和 git lfs，确保安装git的时候已经
+
+通过下方的命令获取代码
+
+```powershell
+git lfs install
+git clone https://github.com/dodoleon/games106.git
+cd games106
+git submodule update --init
+```
+
+## Prerequisites
+
+来自Cauldron
+
+- [Git](https://git-scm.com/)
+- [CMake 3.24](https://cmake.org/download/)
+- [Visual Studio 2019 or 2022](https://visualstudio.microsoft.com/downloads/)
+- [Windows SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk) 在安装VS的时候，勾选上最新版本的SDK
+- [Vulkan SDK](https://www.lunarg.com/vulkan-sdk/) 直接下载最新的Vulkan SDK，同时更新显卡驱动到最新的版本
+
+## how to build
+
+```powershell
+cd games106
+mkdir out
+cd out
+cmake ..
+./games106.sln
+```
+
+
+
 # homework
 
 ## homework0
@@ -31,25 +68,4 @@ Vulkan的调试有两类
 - Vulkan 图形渲染的相关问题，可以在Vulkan的[相关页面](https://www.vulkan.org/tools#profilers-and-debuggers)中寻找和学习者显卡厂商相关的工具，这里比较推荐[RenderDoc](https://renderdoc.org/)和[Nvidia Nsight Graphics](https://developer.nvidia.com/nsight-graphics)
 
 Vulkan 的Profile 推荐使用显卡厂商做的工具，同样可以在Vulkan的[相关页面](https://www.vulkan.org/tools#profilers-and-debuggers)中寻找和学习者显卡厂商相关的工具。这里不推荐使用RenderDoc做性能分析，它给的结果不太准确。
-
-# Build
-
-## Prerequisites
-
-来自Cauldron
-
-- [CMake 3.24](https://cmake.org/download/)
-- [Visual Studio 2019 or 2022](https://visualstudio.microsoft.com/downloads/)
-- [Windows SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-sdk) 在安装VS的时候，勾选上最新版本的SDK
-- [Vulkan SDK](https://www.lunarg.com/vulkan-sdk/) 直接下载最新的Vulkan SDK，同时更新显卡驱动到最新的版本
-
-## how to build
-
-```powershell
-cd games106
-mkdir out
-cd out
-cmake ..
-./games106.sln
-```
 
