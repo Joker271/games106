@@ -13,11 +13,13 @@ games106 现代图形绘制流水线原理与实践，作业框架。
 
 作业0 是一个hello triangle的代码。
 
-期望得到的渲染结果是一个青色背景的三角形![homework0_0](.\img\homework0_0.png)
+期望得到的渲染结果是一个青色背景的三角形
+
+![homework0_0](./img/homework0_0.png)
 
 直接运行会得到一个黑色背景的三角形。
 
-![homework0_1](.\img\homework0_1.png)
+![homework0_1](./img/homework0_1.png)
 
 作业0就是修复这个渲染错误。可以使用下面推荐的调试工具以及方法。
 
