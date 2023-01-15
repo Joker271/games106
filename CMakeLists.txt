@@ -6,5 +6,4 @@ set(GFX_API VK)
 
 find_package(Vulkan REQUIRED)
 add_subdirectory(thirdparty)
-add_subdirectory(homeworkCommon)
 add_subdirectory(homework0)
