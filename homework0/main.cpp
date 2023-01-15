@@ -21,15 +21,10 @@ public:
     void OnResize(bool resizeRender) override;
     void OnUpdateDisplay() override;
 
-    auto createRenderPass() -> void;
+    auto destroyGraphicsPipeline() -> void;
     auto createGraphicsPipeline() -> void;
-    auto createFramebuffers() -> void;
-    auto createCommandPool() -> void;
-    auto createCommandBuffer() -> void;
-    auto createSyncObjects() -> void;
 
     CommandListRing m_CommandListRing;
-
     VkPipelineLayout pipelineLayout;
     VkPipeline graphicsPipeline;
 };
@@ -39,9 +34,15 @@ Homework0Sample::Homework0Sample(LPCSTR name) :
 {
 }
 
-auto Homework0Sample::createRenderPass() -> void
+auto Homework0Sample::destroyGraphicsPipeline() -> void
 {
+    vkDestroyPipelineLayout(m_device.GetDevice(), pipelineLayout, nullptr);
+    pipelineLayout = VK_NULL_HANDLE;
+    vkDestroyPipeline(m_device.GetDevice(), graphicsPipeline, nullptr);
+    graphicsPipeline = VK_NULL_HANDLE;
 }
+
+
 auto Homework0Sample::createGraphicsPipeline() -> void
 {
     VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
@@ -152,23 +153,6 @@ auto Homework0Sample::createGraphicsPipeline() -> void
     {
         throw std::runtime_error("failed to create graphics pipeline!");
     }
-
-    vkDestroyShaderModule(m_device.GetDevice(), vertShaderStageInfo.module, nullptr);
-    vkDestroyShaderModule(m_device.GetDevice(), vertShaderStageInfo.module, nullptr);
-}
-auto Homework0Sample::createFramebuffers() -> void
-{
-}
-
-
-auto Homework0Sample::createCommandPool() -> void
-{
-}
-auto Homework0Sample::createCommandBuffer() -> void
-{
-}
-auto Homework0Sample::createSyncObjects() -> void
-{
 }
 
 void Homework0Sample::OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint32_t* pHeight)
@@ -216,13 +200,6 @@ void Homework0Sample::OnCreate()
 
     m_CommandListRing.OnCreate(&m_device, backBufferCount, commandListsPerBackBuffer);
 
-    createRenderPass();
-    createGraphicsPipeline();
-    createFramebuffers();
-    createCommandPool();
-    createCommandBuffer();
-    createSyncObjects();
-
     OnResize(true);
     OnUpdateDisplay();
 }
@@ -230,6 +207,7 @@ void Homework0Sample::OnDestroy()
 {
     m_device.GPUFlush();
     m_CommandListRing.OnDestroy();
+    destroyGraphicsPipeline();
     // shut down the shader compiler
     DestroyShaderCache(&m_device);
 }
@@ -243,8 +221,7 @@ void Homework0Sample::OnRender()
     m_CommandListRing.OnBeginFrame();
     VkCommandBuffer commandBuffer = m_CommandListRing.GetNewCommandList();
 
-    vkResetCommandBuffer(commandBuffer, /*VkCommandBufferResetFlagBits*/ 0);
-
+    // hello triangle draw
     {
         VkCommandBufferBeginInfo beginInfo{};
         beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
@@ -328,7 +305,11 @@ bool Homework0Sample::OnEvent(MSG msg)
 {
     return true;
 }
-void Homework0Sample::OnResize(bool resizeRender) {}
+void Homework0Sample::OnResize(bool resizeRender)
+{
+    destroyGraphicsPipeline();
+    createGraphicsPipeline();
+}
 
 void Homework0Sample::OnUpdateDisplay() {}
 
