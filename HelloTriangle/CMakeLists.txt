@@ -1,15 +1,15 @@
 cmake_minimum_required(VERSION 3.6)
-set(TARGET homework0)
+set(TARGET HelloTriangle)
 
-add_library(homework0_copy INTERFACE)
+add_library(HelloTriangle_copy INTERFACE)
 
 set(config
     ${CMAKE_CURRENT_SOURCE_DIR}/hello_triangle_vert.glsl
     ${CMAKE_CURRENT_SOURCE_DIR}/hello_triangle_frag.glsl
 )
 
-copyTargetCommand("${config}" ${CMAKE_CURRENT_SOURCE_DIR}/../bin/ShaderLibVK/homework0 copied_homework0)
-add_dependencies(homework0_copy copied_homework0)
+copyTargetCommand("${config}" ${CMAKE_CURRENT_SOURCE_DIR}/../bin/ShaderLibVK/HelloTriangle copied_HelloTriangle)
+add_dependencies(HelloTriangle_copy copied_HelloTriangle)
 
 set(sources
     main.cpp
@@ -23,6 +23,6 @@ add_executable(${TARGET} WIN32 ${sources})
 
 target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(${TARGET} PUBLIC homework0_copy Cauldron_VK ImGUI Vulkan::Vulkan)
+target_link_libraries(${TARGET} PUBLIC HelloTriangle_copy Cauldron_VK ImGUI Vulkan::Vulkan)
 
 set_target_properties(${TARGET} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_HOME_DIRECTORY}/bin" DEBUG_POSTFIX "d")

@@ -20,7 +20,7 @@
 #include "stdafx.h"
 
 #include "UI.h"
-#include "Homework1Sample.h"
+#include "gltfLoadSample.h"
 #include "imgui.h"
 
 #include "base/FrameworkWindows.h"
@@ -60,7 +60,7 @@ template<class T> static T clamped(const T& v, const T& min, const T& max)
 }
 
 
-void Homework1Sample::BuildUI()
+void gltfLoadSample::BuildUI()
 {
     // if we haven't initialized GLTFLoader yet, don't draw UI.
     if (m_pGltfLoader == nullptr)

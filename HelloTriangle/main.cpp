@@ -9,10 +9,10 @@ using namespace CAULDRON_VK;
 using namespace nlohmann;
 // We are queuing (backBufferCount + 0.5) frames, so we need to triple buffer the resources that get modified each frame
 constexpr int backBufferCount = 3;
-class Homework0Sample : public FrameworkWindows
+class HelloTriangleSample : public FrameworkWindows
 {
 public:
-    Homework0Sample(LPCSTR name);
+    HelloTriangleSample(LPCSTR name);
     void OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint32_t* pHeight) override;
     void OnCreate() override;
     void OnDestroy() override;
@@ -29,12 +29,12 @@ public:
     VkPipeline graphicsPipeline;
 };
 
-Homework0Sample::Homework0Sample(LPCSTR name) :
+HelloTriangleSample::HelloTriangleSample(LPCSTR name) :
     FrameworkWindows(name)
 {
 }
 
-auto Homework0Sample::destroyGraphicsPipeline() -> void
+auto HelloTriangleSample::destroyGraphicsPipeline() -> void
 {
     vkDestroyPipelineLayout(m_device.GetDevice(), pipelineLayout, nullptr);
     pipelineLayout = VK_NULL_HANDLE;
@@ -43,7 +43,7 @@ auto Homework0Sample::destroyGraphicsPipeline() -> void
 }
 
 
-auto Homework0Sample::createGraphicsPipeline() -> void
+auto HelloTriangleSample::createGraphicsPipeline() -> void
 {
     VkPipelineShaderStageCreateInfo vertShaderStageInfo{};
     VkPipelineShaderStageCreateInfo fragShaderStageInfo{};
@@ -51,7 +51,7 @@ auto Homework0Sample::createGraphicsPipeline() -> void
     if (VKCompileFromFile(
             m_device.GetDevice(),
             VK_SHADER_STAGE_VERTEX_BIT,
-            "homework0/hello_triangle_vert.glsl",
+            "HelloTriangle/hello_triangle_vert.glsl",
             "main", "",
             nullptr, &vertShaderStageInfo) != VkResult::VK_SUCCESS)
     {
@@ -61,7 +61,7 @@ auto Homework0Sample::createGraphicsPipeline() -> void
     if (VKCompileFromFile(
             m_device.GetDevice(),
             VK_SHADER_STAGE_FRAGMENT_BIT,
-            "homework0/hello_triangle_frag.glsl",
+            "HelloTriangle/hello_triangle_frag.glsl",
             "main", "",
             nullptr, &fragShaderStageInfo) != VkResult::VK_SUCCESS)
     {
@@ -155,7 +155,7 @@ auto Homework0Sample::createGraphicsPipeline() -> void
     }
 }
 
-void Homework0Sample::OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint32_t* pHeight)
+void HelloTriangleSample::OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint32_t* pHeight)
 {
     // set some default values
     *pWidth = 1920;
@@ -190,7 +190,7 @@ void Homework0Sample::OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint
     }
 }
 
-void Homework0Sample::OnCreate()
+void HelloTriangleSample::OnCreate()
 {
     // Init the shader compiler
     InitDirectXCompiler();
@@ -203,7 +203,7 @@ void Homework0Sample::OnCreate()
     OnResize(true);
     OnUpdateDisplay();
 }
-void Homework0Sample::OnDestroy()
+void HelloTriangleSample::OnDestroy()
 {
     m_device.GPUFlush();
     m_CommandListRing.OnDestroy();
@@ -212,7 +212,7 @@ void Homework0Sample::OnDestroy()
     DestroyShaderCache(&m_device);
 }
 
-void Homework0Sample::OnRender()
+void HelloTriangleSample::OnRender()
 {
     // Do any start of frame necessities
     BeginFrame();
@@ -301,25 +301,25 @@ void Homework0Sample::OnRender()
     EndFrame();
 }
 
-bool Homework0Sample::OnEvent(MSG msg)
+bool HelloTriangleSample::OnEvent(MSG msg)
 {
     return true;
 }
-void Homework0Sample::OnResize(bool resizeRender)
+void HelloTriangleSample::OnResize(bool resizeRender)
 {
     destroyGraphicsPipeline();
     createGraphicsPipeline();
 }
 
-void Homework0Sample::OnUpdateDisplay() {}
+void HelloTriangleSample::OnUpdateDisplay() {}
 
 int WINAPI WinMain(HINSTANCE hInstance,
                    HINSTANCE hPrevInstance,
                    LPSTR lpCmdLine,
                    int nCmdShow)
 {
-    LPCSTR Name = "Homework0Sample";
+    LPCSTR Name = "HelloTriangleSample";
 
-    // create new Homework0Sample  sample
-    return RunFramework(hInstance, lpCmdLine, nCmdShow, new Homework0Sample(Name));
+    // create new HelloTriangleSample  sample
+    return RunFramework(hInstance, lpCmdLine, nCmdShow, new HelloTriangleSample(Name));
 }

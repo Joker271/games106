@@ -19,9 +19,9 @@
 
 #include "stdafx.h"
 #include <intrin.h>
-#include "Homework1Sample.h"
+#include "gltfLoadSample.h"
 
-Homework1Sample::Homework1Sample(LPCSTR name) : FrameworkWindows(name)
+gltfLoadSample::gltfLoadSample(LPCSTR name) : FrameworkWindows(name)
 {
     m_time = 0;
     m_bPlay = true;
@@ -34,7 +34,7 @@ Homework1Sample::Homework1Sample(LPCSTR name) : FrameworkWindows(name)
 // OnParseCommandLine
 //
 //--------------------------------------------------------------------------------------
-void Homework1Sample::OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint32_t* pHeight)
+void gltfLoadSample::OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint32_t* pHeight)
 {
     // set some default values
     *pWidth = 1920;
@@ -80,7 +80,7 @@ void Homework1Sample::OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint
     // read config file (and override values from commandline if so)
     //
     {
-        std::ifstream f("homework1Sample.json");
+        std::ifstream f("gltfLoadSample.json");
         if (!f)
         {
             MessageBox(NULL, "Config file not found!\n", "Cauldron Panic!", MB_ICONERROR);
@@ -93,7 +93,7 @@ void Homework1Sample::OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint
         }
         catch (json::parse_error)
         {
-            MessageBox(NULL, "Error parsing homework1Sample.json!\n", "Cauldron Panic!", MB_ICONERROR);
+            MessageBox(NULL, "Error parsing gltfLoadSample.json!\n", "Cauldron Panic!", MB_ICONERROR);
             exit(0);
         }
     }
@@ -111,7 +111,7 @@ void Homework1Sample::OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint
 // OnCreate
 //
 //--------------------------------------------------------------------------------------
-void Homework1Sample::OnCreate()
+void gltfLoadSample::OnCreate()
 {
     // Init the shader compiler
     InitDirectXCompiler();
@@ -137,7 +137,7 @@ void Homework1Sample::OnCreate()
 // OnDestroy
 //
 //--------------------------------------------------------------------------------------
-void Homework1Sample::OnDestroy()
+void gltfLoadSample::OnDestroy()
 {
     ImGUI_Shutdown();
 
@@ -164,7 +164,7 @@ void Homework1Sample::OnDestroy()
 // OnEvent, win32 sends us events and we forward them to ImGUI
 //
 //--------------------------------------------------------------------------------------
-bool Homework1Sample::OnEvent(MSG msg)
+bool gltfLoadSample::OnEvent(MSG msg)
 {
     if (ImGUI_WndProcHandler(msg.hwnd, msg.message, msg.wParam, msg.lParam))
         return true;
@@ -190,7 +190,7 @@ bool Homework1Sample::OnEvent(MSG msg)
 // OnResize
 //
 //--------------------------------------------------------------------------------------
-void Homework1Sample::OnResize(bool resizeRender)
+void gltfLoadSample::OnResize(bool resizeRender)
 {
     // destroy resources (if we are not minimized)
     if (resizeRender && m_Width && m_Height && m_pRenderer)
@@ -207,7 +207,7 @@ void Homework1Sample::OnResize(bool resizeRender)
 // UpdateDisplay
 //
 //--------------------------------------------------------------------------------------
-void Homework1Sample::OnUpdateDisplay()
+void gltfLoadSample::OnUpdateDisplay()
 {
     // Destroy resources (if we are not minimized)
     if (m_pRenderer)
@@ -221,7 +221,7 @@ void Homework1Sample::OnUpdateDisplay()
 // LoadScene
 //
 //--------------------------------------------------------------------------------------
-void Homework1Sample::LoadScene(int sceneIndex)
+void gltfLoadSample::LoadScene(int sceneIndex)
 {
     json scene = m_jsonConfigFile["scenes"][sceneIndex];
 
@@ -306,7 +306,7 @@ void Homework1Sample::LoadScene(int sceneIndex)
 // OnUpdate
 //
 //--------------------------------------------------------------------------------------
-void Homework1Sample::OnUpdate()
+void gltfLoadSample::OnUpdate()
 {
     ImGuiIO& io = ImGui::GetIO();
 
@@ -343,7 +343,7 @@ void Homework1Sample::OnUpdate()
     }
 }
 
-void Homework1Sample::HandleInput(const ImGuiIO& io)
+void gltfLoadSample::HandleInput(const ImGuiIO& io)
 {
     auto fnIsKeyTriggered = [&io](char key) { return io.KeysDown[key] && io.KeysDownDuration[key] == 0.0f; };
 
@@ -365,7 +365,7 @@ void Homework1Sample::HandleInput(const ImGuiIO& io)
         m_UIState.ToggleMagnifierLock();
 }
 
-void Homework1Sample::UpdateCamera(Camera& cam, const ImGuiIO& io)
+void gltfLoadSample::UpdateCamera(Camera& cam, const ImGuiIO& io)
 {
     float yaw = cam.GetYaw();
     float pitch = cam.GetPitch();
@@ -415,7 +415,7 @@ void Homework1Sample::UpdateCamera(Camera& cam, const ImGuiIO& io)
 // OnRender, updates the state from the UI, animates, transforms and renders the scene
 //
 //--------------------------------------------------------------------------------------
-void Homework1Sample::OnRender()
+void gltfLoadSample::OnRender()
 {
     // Do any start of frame necessities
 	BeginFrame();
@@ -468,5 +468,5 @@ int WINAPI WinMain(HINSTANCE hInstance,
     LPCSTR Name = "SampleVK v1.4.1";
 
     // create new Vulkan sample
-    return RunFramework(hInstance, lpCmdLine, nCmdShow, new Homework1Sample(Name));
+    return RunFramework(hInstance, lpCmdLine, nCmdShow, new gltfLoadSample(Name));
 }

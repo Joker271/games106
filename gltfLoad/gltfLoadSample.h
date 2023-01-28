@@ -25,10 +25,10 @@
 // This class encapsulates the 'application' and is responsible for handling window events and scene updates (simulation)
 // Rendering and rendering resource management is done by the Renderer class
 
-class Homework1Sample : public FrameworkWindows
+class gltfLoadSample : public FrameworkWindows
 {
 public:
-    Homework1Sample(LPCSTR name);
+    gltfLoadSample(LPCSTR name);
     void OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint32_t* pHeight) override;
 	void OnCreate() override;
     void OnDestroy() override;
