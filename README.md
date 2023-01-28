@@ -46,9 +46,11 @@ cmake ..
 
 # homework
 
+代码样例会有一个拷贝数据的过程，程序的工作路径在bin文件夹下，cmake会生成一个生成的后处理任务来拷贝数据到bin文件夹下（所以不要直接修改bin文件夹下的数据，项目被编译一次就会被覆盖掉，幸苦的作业就都没有了，笑~~~）。同样如果想要增加一些新的文件，需要在对应的cmake文件里面增加，可以搜索copyTargetCommand函数。查看如何使用。
+
 ## homework0
 
-作业0 是一个hello triangle的代码。
+作业0 是一个hello triangle的样例。代码在HelloTriangle项目下
 
 期望得到的渲染结果是一个青色背景的三角形
 
@@ -59,6 +61,34 @@ cmake ..
 ![homework0_1](./img/homework0_1.png)
 
 作业0就是修复这个渲染错误。可以使用下面推荐的调试工具以及方法。
+
+## homework1
+
+作业1 gltf渲染框架。这个框架是基于AMD的[glTFSample](https://github.com/GPUOpen-LibrariesAndSDKs/glTFSample)。后续很多的作业可以在这个基础上改动。代码在gltfLoad项目下。
+
+## homework2
+
+作业2 profile，gltfLoad项目里面有各个阶段的时间统计。这里推荐使用NV的Nsight Graphic工具来做性能分析。
+
+## homework3
+
+作业3 细分着色器实现。代码在PNTriangle里面。
+
+## homework4
+
+作业4 压缩纹理的压缩和实现
+
+## homework5
+
+作业5 几何处理，生成好简化模型的gltf文件，通过gltfLoad项目导入显示。
+
+## homework6
+
+作业6 压缩纹理的压缩和实现
+
+## homework7
+
+作业7 LOD系统
 
 # Debug & Profile
 
