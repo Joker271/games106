@@ -8,7 +8,7 @@ set(config
     ${CMAKE_CURRENT_SOURCE_DIR}/hello_triangle_frag.glsl
 )
 
-copyTargetCommand("${config}" ${CMAKE_CURRENT_SOURCE_DIR}/../bin/ShaderLibVK/HelloTriangle copied_HelloTriangle)
+copyTargetCommand("${config}" ${CMAKE_CURRENT_SOURCE_DIR}/../../bin/ShaderLibVK/HelloTriangle copied_HelloTriangle)
 add_dependencies(HelloTriangle_copy copied_HelloTriangle)
 
 set(sources
@@ -26,3 +26,5 @@ target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(${TARGET} PUBLIC HelloTriangle_copy Cauldron_VK ImGUI Vulkan::Vulkan)
 
 set_target_properties(${TARGET} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_HOME_DIRECTORY}/bin" DEBUG_POSTFIX "d")
+
+set_target_properties(${TARGET} PROPERTIES FOLDER Sample)
