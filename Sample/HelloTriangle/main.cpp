@@ -25,8 +25,8 @@ public:
     auto createGraphicsPipeline() -> void;
 
     CommandListRing m_CommandListRing;
-    VkPipelineLayout pipelineLayout;
-    VkPipeline graphicsPipeline;
+    VkPipelineLayout pipelineLayout = VK_NULL_HANDLE;
+    VkPipeline graphicsPipeline = VK_NULL_HANDLE;
 };
 
 HelloTriangleSample::HelloTriangleSample(LPCSTR name) :
