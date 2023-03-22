@@ -27,6 +27,11 @@ add_executable(${TARGET} WIN32 ${sources} )
 
 target_link_libraries(${TARGET} LINK_PUBLIC gltfLoad_copy Cauldron_VK ImGUI Vulkan::Vulkan)
 
+set_property(
+    TARGET ${TARGET}
+    PROPERTY RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/bin
+)
+
 set_target_properties(${TARGET} PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_HOME_DIRECTORY}/bin" DEBUG_POSTFIX "d")
 
 set_target_properties(${TARGET} PROPERTIES FOLDER Sample)

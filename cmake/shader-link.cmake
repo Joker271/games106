@@ -1,0 +1,23 @@
+get_filename_component(PROJECT_ROOT ./Sample ABSOLUTE BASE_DIR ${CMAKE_HOME_DIRECTORY})
+
+include(command)
+
+set(SHADER_PROJECTS)
+file(GLOB PROJECTS_CANDIDATES RELATIVE ${PROJECT_ROOT} CONFIGURE_DEPENDS ${PROJECT_ROOT}/*)
+
+foreach (PROJECT ${PROJECTS_CANDIDATES})
+    if (IS_DIRECTORY ${PROJECT_ROOT}/${PROJECT}/shader/${PROJECT})
+        list(APPEND SHADER_PROJECTS ${PROJECT})
+    endif ()
+endforeach ()
+
+set(BIN_DIR ${CMAKE_HOME_DIRECTORY}/bin/ShaderLibVK)
+
+set(REMOVE_SHADER)
+set(LINK_SHADER_DIRECTORIES)
+foreach (PROJECT ${SHADER_PROJECTS})
+    remove_directory_command(REMOVE_DIR ${BIN_DIR}/${PROJECT})
+    link_directory_command(LINK_DIR ${PROJECT_ROOT}/${PROJECT}/shader/${PROJECT} ${BIN_DIR}/${PROJECT})
+    list(APPEND REMOVE_SHADER ${REMOVE_DIR})
+    list(APPEND LINK_SHADER_DIRECTORIES ${LINK_DIR})
+endforeach ()
